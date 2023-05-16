@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#define MTIMER_BASE 0x2004000
+#define MTIMER_BASE 0x2008000
 #define MTIMECMP MTIMER_BASE
-#define MTIME (MTIMER_BASE + 0x7ff8)
+#define MTIME (MTIMER_BASE + 0x8000)
 #define MSWI_BASE 0x2000000
 #define SSWI_BASE 0x2f00000
 #define TIMER_INTERVAL 0x1000
