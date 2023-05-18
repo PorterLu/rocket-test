@@ -45,7 +45,6 @@ void timer_load(int interval) {
 void init_time_interrupt() {
   timer_load(TIMER_INTERVAL);
   w_mie(r_mie() | MIE_MTIE);
-  w_mstatus(r_mstatus() | MSTATUS_MIE);
 }
 
 void timer_handler() {
@@ -60,12 +59,17 @@ void software_interrupt_test() {
   *(uint32_t*)MSWI_BASE = 1;
 }
 
+void enable_interrupt() {
+  w_mstatus(r_mstatus() | MSTATUS_MIE);
+}
+
 void software_handler() {
   printf("clear software interrupt\n");
   *(uint32_t*)MSWI_BASE = 0;
 }
 
 int main() {
+  enable_interrupt();
   software_interrupt_test();
   init_time_interrupt();
   while(1) {
